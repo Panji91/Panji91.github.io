@@ -18,11 +18,15 @@ layout: default
       }
       .inhr {
         border: 1px solid black;
-        margin-top: 2px;
-        margin-bottom: 2px;
+        margin: 20px 0 10px 0;
       }
-      hr {
+      .tophr {
         border: 2px double gray;
+        margin: 40px 0 20px 0;
+      }
+      .bottomhr {
+        border: 2px double gray;
+        margin: 20px 0 40px 0;
       }
 
       h2 {
@@ -88,7 +92,7 @@ layout: default
         </div>
         <button id="gameR" disabled="disabled" onclick="reset()">초기화</button>
       </div>
-      <hr />
+      <hr class="tophr" />
       <div class="mobHpState">
         <div
           style="
@@ -114,9 +118,9 @@ layout: default
             id="pkHpBar"
             style="
               float: left;
-              width: 200px;
+              width: 198px;
               background-color: rgb(113, 238, 211);
-              height: 12px;
+              height: 10px;
             "
           ></div>
         </div>
@@ -142,7 +146,7 @@ layout: default
         </div>
       </div>
       <div id="field"></div>
-      <hr />
+      <hr class="bottomhr" />
       <div id="buttonFWrap">
         <div id="buttonF">
           <div class="hpState">
