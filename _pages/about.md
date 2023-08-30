@@ -15,6 +15,10 @@ comments: false
         <i class="fab fa-fw fa-github" aria-hidden="true"></i> https://github.com/Panji91
     </a>
     </li>
-    <li><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> vksrl1108@naver.com</li>
+    <li>
+    <a href="mailto:vksrl1108@naver.com" style="color:black;text-decoration:none;font-weight:600">
+    <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> vksrl1108@naver.com
+    </a></li>
+    
 </ul>
 <div>
