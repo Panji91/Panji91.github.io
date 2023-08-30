@@ -1,0 +1,424 @@
+---
+layout: default
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>PanKiGame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+      #main {
+        width: 50%;
+        height: 800px;
+        border: 1px dotted black;
+      }
+      .inhr {
+        border: 1px solid black;
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      hr {
+        border: 2px double gray;
+      }
+
+      h2 {
+        text-align: center;
+      }
+      .hpState {
+        width: 70px;
+        height: 100px;
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+      }
+      .mpState {
+        width: 70px;
+        height: 100px;
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+      }
+      .mobHpState {
+        width: 300px;
+        height: 13px;
+      }
+      #field {
+        height: 300px;
+        overflow-y: scroll;
+      }
+      .gameS {
+        width: 70px;
+        height: 100px;
+      }
+      .attackArea {
+        float: left;
+      }
+      #gameR {
+        float: right;
+        height: 100%;
+        width: 15%;
+      }
+      #buttonF {
+        text-align: center;
+        height: 102px;
+      }
+      #buttonFWrap {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div style="width: 100%; height: 60px">
+        <div
+          style="
+            float: left;
+            width: 85%;
+            height: 100%;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          <h3>PankiGame!</h3>
+        </div>
+        <button id="gameR" disabled="disabled" onclick="reset()">초기화</button>
+      </div>
+      <hr />
+      <div class="mobHpState">
+        <div
+          style="
+            height: 100%;
+            width: 25%;
+            font-size: 7px;
+            float: left;
+            margin-left: 3px;
+            vertical-align: middle;
+          "
+        >
+          판기 HP&nbsp;: <span id="pkHP">100</span>
+        </div>
+        <div
+          style="
+            border: solid 1px black;
+            height: 12px;
+            width: 200px;
+            float: left;
+          "
+        >
+          <div
+            id="pkHpBar"
+            style="
+              float: left;
+              width: 200px;
+              background-color: rgb(113, 238, 211);
+              height: 12px;
+            "
+          ></div>
+        </div>
+      </div>
+      <hr class="inhr" />
+      <div style="font-size: 8px; margin-top: 2px">
+        너의 스텟 = 공격력 : 1~<span id="attck">5</span> | 방어력 : 1~<span
+          id="block"
+          >2</span
+        ><br />
+        <div id="statSel">
+          [추가 능력치 선택]<br />
+          <div style="margin-top: 2px">
+            - 추가가능 능력치 : <span id="totP">5</span> -<br />
+            - 공격력 : <span id="attackP">0</span>
+            <button style="font-size: 5px" onclick="attackP();">+</button>
+            <button style="font-size: 5px" onclick="attackMP();">-</button> |
+            방어력 : <span id="blockP">0</span>
+            <button style="font-size: 5px" onclick="blockP();">+</button>
+            <button style="font-size: 5px" onclick="blockMP();">-</button>
+            <button style="font-size: 5px" onclick="selP();">확정</button>
+          </div>
+        </div>
+      </div>
+      <div id="field"></div>
+      <hr />
+      <div id="buttonFWrap">
+        <div id="buttonF">
+          <div class="hpState">
+            <div
+              style="
+                border: solid 1px black;
+                height: 100%;
+                width: 100%;
+                border-radius: 5px;
+                position: relative;
+              "
+            >
+              <div
+                id="userHP"
+                style="
+                  z-index: 1000;
+                  position: absolute;
+                  text-align: center;
+                  width: 70px;
+                "
+              >
+                100
+              </div>
+              <div
+                id="userHpBar"
+                style="
+                  width: 100%;
+                  background-color: rgb(107, 201, 245);
+                  height: 98px;
+                  position: absolute;
+                  text-align: center;
+                  border-radius: 5px;
+                  bottom: 0px;
+                "
+              ></div>
+            </div>
+          </div>
+          <div class="attackArea">
+            <button
+              class="gameS"
+              disabled="disabled"
+              data-val="atk"
+              onclick="useAttck(this);"
+            >
+              공격
+            </button>
+            <button
+              class="gameS"
+              disabled="disabled"
+              data-val="mag"
+              onclick="useAttck(this);"
+            >
+              마법
+            </button>
+          </div>
+          <div class="mpState">
+            <div
+              style="
+                border: solid 1px black;
+                height: 100%;
+                width: 100%;
+                border-radius: 5px;
+                position: relative;
+              "
+            >
+              <div
+                id="userHP"
+                style="
+                  z-index: 1000;
+                  position: absolute;
+                  text-align: center;
+                  width: 70px;
+                "
+              >
+                100
+              </div>
+              <div
+                id="userHpBar"
+                style="
+                  width: 100%;
+                  background-color: rgb(238, 243, 164);
+                  height: 98px;
+                  position: absolute;
+                  text-align: center;
+                  border-radius: 5px;
+                  bottom: 0px;
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let pankiHp = 100;
+    let userHp = 100;
+    let totPV = 5;
+    let attackPV = 0;
+    let blockPV = 0;
+    let attk = 5;
+    let block = 2;
+    function attackP() {
+      if (totPV != 0) {
+        attackPV += 1;
+        totPV -= 1;
+        $("#attackP").text(attackPV);
+        $("#totP").text(totPV);
+      }
+    }
+    function blockP() {
+      if (totPV != 0) {
+        blockPV += 1;
+        totPV -= 1;
+        $("#blockP").text(blockPV);
+        $("#totP").text(totPV);
+      }
+    }
+    function attackMP() {
+      if (totPV != 5 && attackPV != 0) {
+        attackPV -= 1;
+        totPV += 1;
+        $("#attackP").text(attackPV);
+        $("#totP").text(totPV);
+      }
+    }
+    function blockMP() {
+      if (totPV != 5 && blockPV != 0) {
+        blockPV -= 1;
+        totPV += 1;
+        $("#blockP").text(blockPV);
+        $("#totP").text(totPV);
+      }
+    }
+    let pankiAttckP = 0;
+    let pankiBlockP = 0;
+    function selP() {
+      if (totPV != 0) {
+        alert("포인트를 다쓰시오.");
+        return false;
+      }
+      attk += attackPV;
+      block += blockPV;
+      $("#attck").text(attk);
+      $("#block").text(block);
+      $("#statSel").hide();
+      $(".gameS").removeAttr("disabled");
+      pankiAttckP = attk;
+      pankiBlockP = block + 1;
+    }
+
+    class Mob {
+      constructor({ atkMaxP, atkMinP, blkMaxP, blkMinP }) {
+        this.mobName = ["슬라임", "고블린", "달팽이", "김민성", "최구봉"];
+        this.name =
+          this.mobName[Math.round(Math.random() * this.mobName.length)];
+        this.atkP = Math.round(Math.random() * atkMaxP + atkMinP);
+        this.blkP = Math.round(Math.random() * blkMaxP + blkMinP);
+      }
+      get name() {
+        return this._name;
+      }
+      set name(name) {
+        this._name = name;
+      }
+      get atkP() {
+        return this._atkP;
+      }
+      set atkP(atkP) {
+        this._atkP = atkP;
+      }
+      get blkP() {
+        return this._blkP;
+      }
+      set blkP(blkP) {
+        this._blkP = blkP;
+      }
+    }
+
+    function useAttck(val) {
+      $(".gameS").attr("disabled", "disabled");
+      let pkattkD = 0;
+      let userattkD = 0;
+      let pkA = Math.round(Math.random() * pankiAttckP + 1);
+      let useA = 0;
+      let atkCase = $(val).attr("data-val");
+      if (atkCase === "atk") {
+        useA = Math.round(Math.random() * attk + 1);
+      } else {
+        useA = Math.round(Math.random() * attk + 1);
+      }
+      let pkD = Math.round(Math.random() * pankiBlockP + 1);
+      let useD = Math.round(Math.random() * block + 1);
+      pkattkD = useA - pkD < 0 ? 0 : useA - pkD;
+      userattkD = pkA - useD < 0 ? 0 : pkA - useD;
+      pankiHp -= pkattkD;
+      userHp -= userattkD;
+      if (pankiHp < 0) {
+        $("#pkHP").text(0);
+        pankiHp = 0;
+        $("#pkHpBar").css("width", pankiHp + "px");
+      } else {
+        $("#pkHP").text(pankiHp);
+        $("#pkHpBar").css("width", pankiHp * 2 + "px");
+      }
+      if (userHp < 0) {
+        $("#userHP").text(0);
+        userHp = 0;
+        $("#userHpBar")
+          .css("height", userHp + "px")
+          .css("bottom", "0px");
+      } else {
+        $("#userHP").text(userHp);
+        $("#userHpBar")
+          .css("height", userHp + "px")
+          .css("bottom", "0px");
+      }
+      let strD =
+        "<span style='font-size:8px'>" +
+        "너의 공격력(" +
+        useA +
+        ")으로 공격했으나 판기의 방어력(" +
+        pkD +
+        ")으로 방어하여 총 " +
+        pkattkD +
+        "의 데미지를 입혔다.<br/>" +
+        "판기의 공격력(" +
+        pkA +
+        ")으로 공격했으나 너의 방어력(" +
+        useD +
+        ")으로 방어하여 총 " +
+        userattkD +
+        "의 데미지를 입었다.<br/>" +
+        "</span>";
+      $("#field").append(strD);
+      if (pankiHp == 0 || userHp == 0) {
+        if (userHp == 0) {
+          $("#field").append("판기가 살아남았다!!!게임종료...");
+        } else if (pankiHp == 0) {
+          $("#field").append("너가 살아남았다!!!게임종료...");
+        } else if (pankiHp == 0 && userHp == 0) {
+          $("#field").append("비겨부렀어!!");
+        }
+        $("#gameR").removeAttr("disabled");
+      } else {
+        setTimeout(function aa() {
+          $(".gameS").removeAttr("disabled");
+        }, 500);
+      }
+      let chat = document.querySelector("#field");
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function reset() {
+      pankiHp = 100;
+      userHp = 100;
+      totPV = 5;
+      attackPV = 0;
+      blockPV = 0;
+      attk = 5;
+      block = 2;
+      pankiAttckP = 0;
+      pankiBlockP = 0;
+      pkattkD = 0;
+      userattkD = 0;
+      $("#attackP").text(attackPV);
+      $("#totP").text(totPV);
+      $("#blockP").text(blockPV);
+      $("#pkHP").text(pankiHp);
+      $("#userHP").text(userHp);
+      $("#field").text("");
+      $("#statSel").show();
+      $("#gameR").attr("disabled", "disabled");
+      $("#attck").text(attk);
+      $("#block").text(block);
+      $("#pkHpBar").css("width", "200px");
+      $("#userHpBar").css("height", "100px");
+    }
+  </script>
+</html>
