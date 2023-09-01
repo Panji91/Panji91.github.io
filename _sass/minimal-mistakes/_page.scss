@@ -64,7 +64,6 @@ body {
     clear: both;
 
     .page__content,
-    .page__meta,
     .page__share {
       position: relative;
       float: left;
@@ -73,9 +72,20 @@ body {
       width: 100%;
       clear: both;
     }
+    .page__meta{
+      position: relative;
+      float: left;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      clear: both;
+      height: auto;
+    }
   }
 }
-
+#postUnderLine{
+  margin:5px;
+}
 .page__title {
   margin-top: 0;
   line-height: 1.5;
@@ -322,24 +332,26 @@ body {
    ========================================================================== */
 
 .page__taxonomy {
+  
   .sep {
     display: none;
   }
 
   strong {
     margin-right: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
   }
 }
 
 .page__taxonomy-item {
   display: inline-block;
   margin-right: 5px;
-  margin-bottom: 8px;
-  padding: 5px 10px;
+  padding: 3px 8px;
   text-decoration: none;
   border: 1px solid mix(#000, $border-color, 25%);
   border-radius: $border-radius;
-
+  vertical-align: middle;
   &:hover {
     text-decoration: none;
     color: $link-color-hover;
