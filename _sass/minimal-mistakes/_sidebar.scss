@@ -28,12 +28,13 @@
          viewport height - nav height - masthead x-padding
       */
       max-height: calc(100vh - #{$nav-height} - 2em);
+      border-right: 1.5px solid #{$primary-color};
     }
   }
 
   @include breakpoint($x-large) {
     width: calc(#{$left-sidebar-width} - 1em);
-
+    padding-right:30px;
   }
 
   > * {
@@ -118,9 +119,10 @@
    ========================================================================== */
 
 .author__avatar {
-  display: table-cell;
-  vertical-align: top;
-
+  display: block;
+  text-align: center;
+  border: 4px double rgba($primary-color,0.5);
+  border-radius: 20px;
   @include breakpoint($large) {
     display: block;
     width: auto;
@@ -130,6 +132,7 @@
   img {
     max-width: 80px;
     align-items: center;
+    justify-content:center;
     background-attachment: fixed;
     margin-top: 25px;
     margin-bottom: 10px;
