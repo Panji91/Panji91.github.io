@@ -21,7 +21,10 @@
 
 .archive__item {
   position: relative;
-
+  border: 2px solid #1faaaa7d;
+  margin-bottom: 3px;
+  padding-left:10px;
+  padding-right: 5px;
   a {
     position: relative;
     z-index: 10;
@@ -47,7 +50,7 @@
 }
 
 .archive__item-title {
-  margin-top: 1.3em;
+  //margin-top: 1.3em;
   margin-bottom: 0.25em;
   font-family: $sans-serif;
   font-size: ($h-size-4 + $h-size-3) / 2;
