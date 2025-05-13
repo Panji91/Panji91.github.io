@@ -99,15 +99,25 @@ layout: default
     </div>    
   </body>
   <script>
-    function reset() {
+    function reset(){
       $("#result").text('');
+      let text = ""
+      for (let i =0;i<5;i++){
+        text += (i+1) + " : ";
+        text += createNum();
+        text += "\n";
+      }
+      $('#result').text(text);
+    }
+    function createNum() {
+      
       const numbers = new Set();
       while (numbers.size < 6) {
         let rand = Math.floor(Math.random() * 45) + 1; // 1~45
         numbers.add(rand); // 중복 방지
       }
-      let lottoNumList = Array.from(numbers).sort((a, b) => a - b); // 정렬된 배열 반환
-      $('#result').text(lottoNumList);
+      return Array.from(numbers).sort((a, b) => a - b); // 정렬된 배열 반환
+      
     }
   </script>
 </html>
