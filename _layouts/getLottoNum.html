@@ -1,0 +1,113 @@
+---
+layout: default
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>PanKiGame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+      #main {
+        width: 100%;
+        height: 800px;
+        border: 1px dotted black;
+      }
+      .inhr {
+        border: 1px solid black;
+        margin: 20px 0 10px 0;
+      }
+      .tophr {
+        border: 2px double gray;
+        margin: 40px 0 20px 0;
+      }
+      .bottomhr {
+        border: 2px double gray;
+        margin: 20px 0 40px 0;
+      }
+
+      h2 {
+        text-align: center;
+      }
+      .hpState {
+        width: 70px;
+        height: 100px;
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+      }
+      .mpState {
+        width: 70px;
+        height: 100px;
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+      }
+      .mobHpState {
+        width: 300px;
+        height: 13px;
+      }
+      #field {
+        height: 300px;
+        overflow-y: scroll;
+      }
+      .gameS {
+        width: 70px;
+        height: 100px;
+      }
+      .attackArea {
+        float: left;
+      }
+      #gameR {
+        float: right;
+        height: 100%;
+        width: 15%;
+      }
+      #buttonF {
+        text-align: center;
+        height: 102px;
+      }
+      #buttonFWrap {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div style="width: 100%; height: 60px">
+        <div
+          style="
+            float: left;
+            width: 85%;
+            height: 100%;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          <h3>GetLottoNumber!</h3>
+        </div>
+        <button id="gameR" onclick="reset()">로또번호생성</button>
+      </div>
+      <hr class="tophr" />
+      <dir id="result">
+        
+      </dir>
+    </div>    
+  </body>
+  <script>
+    function reset() {
+      $("#result").text('');
+      const numbers = new Set();
+      while (numbers.size < 6) {
+        let rand = Math.floor(Math.random() * 45) + 1; // 1~45
+        numbers.add(rand); // 중복 방지
+      }
+      let lottoNumList = Array.from(numbers).sort((a, b) => a - b); // 정렬된 배열 반환
+      $('#result').text(lottoNumList);
+    }
+  </script>
+</html>
