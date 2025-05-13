@@ -10,9 +10,9 @@ main:
     url: https://github.com/Panji91
 
   - title: "PankiGame"
-    url: /lotto/
+    url: /game/
   - title: "GetLotto"
-     url: /lotto/
+    url: /lotto/
 
   # - title: "Categories"
   #   url: /categories/
