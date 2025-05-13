@@ -11,8 +11,8 @@ main:
 
   - title: "PankiGame"
     url: /game/
-  # - title: "Projects"
-  #   url: /projects/
+  - title: "GetLotto"
+     url: /lotto/
 
   # - title: "Categories"
   #   url: /categories/
