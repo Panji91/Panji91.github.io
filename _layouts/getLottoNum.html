@@ -106,7 +106,9 @@ layout: default
         text += (i+1) + " : ";
         text += createNum();
       }
-      $('#result').text(text);
+      $('#result').append(text);
+      $('#result').append("<br>");
+      
     }
     function createNum() {
       
